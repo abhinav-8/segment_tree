@@ -7,25 +7,25 @@ public:
 	SGTree(int n){
 		seg.resize(4*n);
 	}
-void build(int index , int low , int high , int arr[] ){
+	void build(int index , int low , int high , int arr[] ){
 
 		if(high == low) 
-				seg[index] = arr[low];
+			seg[index] = arr[low];
 
 		else{
-		
-				int mid = (low + high) >>1 ;
 
-				build(2 * index + 1 , low , mid , arr);
-				
-				build(2 * index + 2 , mid + 1 , high , arr );
-				
-				seg[index] = min(seg[2*index+1],seg[2*index+2]);
-	 
-			}
+			int mid = (low + high) >>1 ;
 
-}
-int query(int index , int low , int high , int l , int r , int arr[] ){
+			build(2 * index + 1 , low , mid , arr);
+
+			build(2 * index + 2 , mid + 1 , high , arr );
+
+			seg[index] = min(seg[2*index+1],seg[2*index+2]);
+
+		}
+
+	}
+	int query(int index , int low , int high , int l , int r , int arr[] ){
 
 		//No overlap l r low high l r
 		if(r < low or l > high) return INT_MAX;
@@ -41,9 +41,9 @@ int query(int index , int low , int high , int l , int r , int arr[] ){
 		int right = query(2 * index + 2 , mid + 1 , high , l , r , arr );
 		
 		return min(left , right); 
-}
+	}
 
-void update(int index , int low  , int high , int i , int val , int arr[] ){
+	void update(int index , int low  , int high , int i , int val , int arr[] ){
 		
 		if(low == high)
 			seg[index] = val;
@@ -60,17 +60,18 @@ void update(int index , int low  , int high , int i , int val , int arr[] ){
 
 		}
 
-}
+	}
 
 };
+
 void solution()
 {
-	int n ;
-	cin >> n ;
-	int arr[n];
+  int n ;
+  cin >> n ;
+  int arr[n];
 	
   for(int i = 0 ; i < n ; i ++ )
-		cin >> arr[i] ;
+    cin >> arr[i] ;
   
   //Object Created
 	SGTree g(n);
@@ -86,7 +87,7 @@ void solution()
 	
 		cin>>type;
 
-	  //type1 is for query in a range  
+	  	//type1 is for query in a range  
 		if(type == 1) 
 		{
 			int l , r ;
@@ -114,15 +115,15 @@ signed main()
 	freopen("output.txt", "w", stdout);
 #endif
 
-		solution();
+solution();
 
 }
 
-// 																	arr = [ 1 2 3 4 ]
-//															How build function is working?
-// 																	0 0 3 seg[0] = 1
-// 							1 0 1                                          		2 2 3  
-//         		seg[1]=1       																		seg[2]=3
-// 3 0 0 				     			4 1 1  										5 2 2												6 3 3
-//seg[3]=1 		      			seg[4]=2  					     seg[5]=3 									seg[6]=4	
+// 								arr = [ 1 2 3 4 ]
+//							 How build function is working?
+// 								0 0 3 seg[0] = 1
+// 			 1 0 1                                          		                    2 2 3  
+//         		seg[1]=1       							                   seg[2]=3
+// 3 0 0 				     	 4 1 1  				  5 2 2			                6 3 3
+//seg[3]=1 		      			seg[4]=2  		       	        seg[5]=3 				seg[6]=4	
 
