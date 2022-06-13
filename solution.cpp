@@ -101,7 +101,7 @@ signed main()
 	freopen("output.txt", "w", stdout);
 #endif
 
-		solution();
+	solution();
 
 }
 
